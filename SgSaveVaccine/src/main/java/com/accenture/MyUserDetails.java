@@ -9,8 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.accenture.model.UserRole;
 import com.accenture.model.Users;
+
+
 
 public class MyUserDetails implements UserDetails {
 
@@ -24,19 +25,18 @@ public class MyUserDetails implements UserDetails {
 		this.users = users;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<UserRole> userRoles = users.getRoles();
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		
-		for (UserRole userRole : userRoles) {
-			authorities.add(new SimpleGrantedAuthority(userRole.getName()));
-
-		}
-		
-		return authorities;
-	}
-
+	/*
+	 * @Override public Collection<? extends GrantedAuthority> getAuthorities() { //
+	 * Set<UserRole> userRoles = users.getRoles(); List<SimpleGrantedAuthority>
+	 * authorities = new ArrayList<>();
+	 * 
+	 * //for (UserRole userRole : userRoles) { authorities.add(new
+	 * SimpleGrantedAuthority(userRole.getName()));
+	 * 
+	 * }
+	 * 
+	 * return authorities; }
+	 */
 	@Override
 	public String getPassword() {
 		return users.getPassword();
@@ -65,6 +65,12 @@ public class MyUserDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

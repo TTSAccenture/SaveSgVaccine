@@ -4,13 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Request {
 	
 	@Id
-	@GeneratedValue	
+	@GeneratedValue	(strategy = GenerationType.IDENTITY)
 	private int requestid;
 	private String sendername;
 	private String senderaddress;
@@ -20,6 +21,8 @@ public class Request {
 	private int receiverphno;
 	private int dosecount;
 	private Date requestdate;
+	private String type;
+	private String region;
 	public int getRequestid() {
 		return requestid;
 	}
@@ -74,15 +77,27 @@ public class Request {
 	public void setRequestdate(Date requestdate) {
 		this.requestdate = requestdate;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
 	@Override
 	public String toString() {
 		return "Request [requestid=" + requestid + ", sendername=" + sendername + ", senderaddress=" + senderaddress
 				+ ", senderphno=" + senderphno + ", receivername=" + receivername + ", receiveraddress="
 				+ receiveraddress + ", receiverphno=" + receiverphno + ", dosecount=" + dosecount + ", requestdate="
-				+ requestdate + "]";
+				+ requestdate + ", type=" + type + ", region=" + region + "]";
 	}
 	public Request(int requestid, String sendername, String senderaddress, int senderphno, String receivername,
-			String receiveraddress, int receiverphno, int dosecount, Date requestdate) {
+			String receiveraddress, int receiverphno, int dosecount, Date requestdate, String type, String region) {
 		super();
 		this.requestid = requestid;
 		this.sendername = sendername;
@@ -93,10 +108,12 @@ public class Request {
 		this.receiverphno = receiverphno;
 		this.dosecount = dosecount;
 		this.requestdate = requestdate;
+		this.type = type;
+		this.region = region;
 	}
 	public Request() {
-		
 	}
 	
 
+	
 }

@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Configuration
 @EnableWebSecurity
@@ -20,16 +20,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		return new UserDetailsServiceImpl();
 	}
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	
 	
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
-		authProvider.setPasswordEncoder(passwordEncoder());
+		
 		
 		return authProvider;
 	}
@@ -49,24 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.logout().permitAll();
 		
-		/*.antMatchers("/").permitAll().and()
-        .authorizeRequests().antMatchers("/console/**").permitAll();*/
+		
 		  
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 
-		
-//			.antMatchers("/").hasAnyAuthority("USER", "CREATOR", "EDITOR", "ADMIN")
-//			.antMatchers("/new").hasAnyAuthority("ADMIN", "CREATOR")
-//			.antMatchers("/edit/**").hasAnyAuthority("ADMIN", "EDITOR")
-//			.antMatchers("/delete/**").hasAuthority("ADMIN")
-//			.anyRequest().authenticated()
-//			.and()
-//			.formLogin().permitAll()
-//			.and()
-//			.logout().permitAll()
-//			.and()
-//			.exceptionHandling().accessDeniedPage("/403")
-//			;
+
 	}
 }
